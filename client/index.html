@@ -1,0 +1,37 @@
+<html>
+  <head>
+    <script src="socket.io.js"></script>
+    <script>
+      const socket = io('http://localhost:3000');
+      socket.on('connect', function() {
+        console.log('Connected');
+
+        const checklist = true;
+        const checklistData = { id: 1, factory: 1, status: 'Disponivel pra fila', position: 1 };
+
+        if(checklist == true){
+          socket.emit('adicionaChecklist', checklistData, data => console.log(data));
+        }
+
+        // if(checklist == true) {
+        //   socket.emit('event', checklistData, data => console.log(data));
+        // } else {
+        //   alert('CheckList invalido!');
+        // }
+
+        socket.emit('events', { test: 'test' }, data => console.log(data));
+        socket.emit('identity', 20, response =>
+          console.log('Identity:', response),
+        );
+      });
+      socket.on('exception', function(data) {
+        console.log('event', data);
+      });
+      socket.on('disconnect', function() {
+        console.log('Disconnected');
+      });
+    </script>
+  </head>
+
+  <body></body>
+</html>
